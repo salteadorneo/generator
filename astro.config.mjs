@@ -1,5 +1,14 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config'
 
-// https://astro.build/config
-export default defineConfig({});
+import tailwind from '@astrojs/tailwind'
+
+export default defineConfig({
+  site: 'https://salteadorneo.github.io',
+  base: 'generator',
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en']
+  },
+  integrations: [tailwind()]
+})
