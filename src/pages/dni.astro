@@ -4,27 +4,26 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
     <section class="bg-white dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+        <div class="px-4 mx-auto max-w-screen-xl text-center">
             <h1
-                class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white"
+                class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
             >
                 Generador de DNI
             </h1>
             <p
-                class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400"
+                class="text-balance mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400"
             >
-                Genera tu DNI (NIF, NIE y CIF) aleatorio para simular datos
-                reales para tus proyectos o para uso académico.
+                Genera un número de DNI válido para pruebas o ejemplos.
             </p>
             <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
                 <input
-                    data-generation-dni
+                    data-generation
                     type="text"
-                    class="w-48 text-center px-4 py-3 text-2xl font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none cursor-copy"
+                    class="w-48 text-center px-4 py-2 text-2xl font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none cursor-copy"
                     readonly
                 />
                 <button
-                    data-generate-dni
+                    data-generate
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800"
                 >
                     Generar
@@ -35,28 +34,23 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-    import confetti from "canvas-confetti";
     import { generateDNI } from "../utils";
 
     const input = document.querySelector(
-        "[data-generation-dni]",
+        "[data-generation]",
     ) as HTMLInputElement;
-    input.value = generateDNI();
 
     const button = document.querySelector(
-        "[data-generate-dni]",
+        "[data-generate]",
     ) as HTMLButtonElement;
 
     button.addEventListener("click", () => {
         input.value = generateDNI();
-        confetti({
-            spread: 180,
-        });
     });
+    input.value = generateDNI();
 
     input.addEventListener("click", () => {
         input.select();
         document.execCommand("copy");
-        console.log("Copied to clipboard");
     });
 </script>
