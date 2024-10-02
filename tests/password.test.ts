@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 
-import { generatePassword } from '../src/utils';
+import { generatePassword } from '../src/utils/password';
 
 test('generatePassword()', () => {
     const password = generatePassword();

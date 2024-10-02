@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+import { entityTypes, provinces } from "../utils/cif";
 ---
 
 <Layout>
@@ -8,12 +10,12 @@ import Layout from "../layouts/Layout.astro";
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
             >
-                Generador de DNI
+                Generador de CIF
             </h1>
             <p
                 class="text-balance mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400"
             >
-                Genera un número de DNI válido para pruebas o ejemplos.
+                Genera un número de CIF válido para pruebas o ejemplos.
             </p>
             <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
                 <input
@@ -29,6 +31,34 @@ import Layout from "../layouts/Layout.astro";
                     Generar
                 </button>
             </div>
+            <div class="mt-4">
+                <select
+                    data-entity-type
+                    class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
+                >
+                    <option value="">Selecciona un tipo de entidad</option>
+                    {
+                        entityTypes.map((type) => (
+                            <option
+                                value={type[0]}
+                            >{`${type[0]} - ${type[1]}`}</option>
+                        ))
+                    }
+                </select>
+                <select
+                    data-province
+                    class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
+                >
+                    <option value="">Selecciona una provincia</option>
+                    {
+                        provinces.map((province) => (
+                            <option
+                                value={province[0]}
+                            >{`${province[1]}`}</option>
+                        ))
+                    }
+                </select>
+            </div>
         </div>
     </section>
     <section class="mt-16 bg-white dark:bg-gray-900">
@@ -36,12 +66,12 @@ import Layout from "../layouts/Layout.astro";
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
             >
-                Validador de DNI
+                Validador de CIF
             </h1>
             <p
                 class="text-balance mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400"
             >
-                Valida un número de DNI para verificar si es válido.
+                Introduce un número de CIF para validar si es correcto.
             </p>
             <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
                 <input
@@ -55,20 +85,35 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-    import { generateDNI, validateDNI } from "../utils/dni";
+    import { generateCIF, validateCIF } from "../utils/cif";
 
     const input = document.querySelector(
         "[data-generation]",
     ) as HTMLInputElement;
+
+    const entity = document.querySelector(
+        "[data-entity-type]",
+    ) as HTMLSelectElement;
+
+    const province = document.querySelector(
+        "[data-province]",
+    ) as HTMLSelectElement;
 
     const button = document.querySelector(
         "[data-generate]",
     ) as HTMLButtonElement;
 
     button.addEventListener("click", () => {
-        input.value = generateDNI();
+        const provinceCodes =
+            province.options[province.selectedIndex].value.split(",");
+        const provinceCode =
+            provinceCodes[Math.floor(Math.random() * provinceCodes.length)];
+        input.value = generateCIF(
+            entity.options[entity.selectedIndex].value,
+            provinceCode,
+        );
     });
-    input.value = generateDNI();
+    input.value = generateCIF();
 
     input.addEventListener("click", () => {
         input.select();
@@ -81,7 +126,7 @@ import Layout from "../layouts/Layout.astro";
 
     validation.addEventListener("keyup", () => {
         const value = validation.value;
-        if (validateDNI(value)) {
+        if (validateCIF(value)) {
             validation.classList.remove("border-red-500");
             validation.classList.add("border-green-500");
         } else {

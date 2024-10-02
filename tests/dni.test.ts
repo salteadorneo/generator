@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 
-import { generateDNI, validateDNI } from '../src/utils';
+import { generateDNI, validateDNI } from '../src/utils/dni';
 
 test('generateDNI()', () => {
     const dni = generateDNI();
@@ -10,10 +10,4 @@ test('generateDNI()', () => {
 test('validateDNI()', () => {
     expect(validateDNI('12345678Z')).toBe(true);
     expect(validateDNI('12345678A')).toBe(false);
-});
-
-test('Math.sqrt()', () => {
-    expect(Math.sqrt(4)).toBe(2);
-    expect(Math.sqrt(144)).toBe(12);
-    expect(Math.sqrt(2)).toBe(Math.SQRT2);
 });
