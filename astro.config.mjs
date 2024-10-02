@@ -4,8 +4,7 @@ import { defineConfig } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
 
 export default defineConfig({
-  site: 'https://salteadorneo.github.io',
-  base: 'generator',
+  site: 'https://generator.salteadorneo.dev',
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en']
