@@ -1,5 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+
+import { entityTypes, provinces } from "@/utils/cif";
 ---
 
 <Layout>
@@ -8,7 +10,11 @@ import Layout from "@/layouts/Layout.astro";
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
             >
-                Generador de NIE
+                CIF Generator
+                <span
+                    class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+                    >BETA</span
+                >
             </h1>
             <div class="flex justify-center gap-4">
                 <input
@@ -21,8 +27,36 @@ import Layout from "@/layouts/Layout.astro";
                     data-generate
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800"
                 >
-                    Generar
+                    Generate
                 </button>
+            </div>
+            <div class="mt-4 flex flex-col gap-4 items-center">
+                <select
+                    data-entity-type
+                    class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
+                >
+                    <option value=""> Select an entity type </option>
+                    {
+                        entityTypes.map((type) => (
+                            <option
+                                value={type[0]}
+                            >{`${type[0]} - ${type[1]}`}</option>
+                        ))
+                    }
+                </select>
+                <select
+                    data-province
+                    class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
+                >
+                    <option value=""> Select a province </option>
+                    {
+                        provinces.map((province) => (
+                            <option
+                                value={province[0]}
+                            >{`${province[1]}`}</option>
+                        ))
+                    }
+                </select>
             </div>
         </div>
     </section>
@@ -31,7 +65,7 @@ import Layout from "@/layouts/Layout.astro";
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
             >
-                Validador de NIE
+                CIF Validator
             </h1>
             <div class="flex justify-center gap-4">
                 <input
@@ -45,20 +79,35 @@ import Layout from "@/layouts/Layout.astro";
 </Layout>
 
 <script>
-    import { generateNIE, validateNIE } from "@/utils/nif";
+    import { generateCIF, validateCIF } from "@/utils/cif";
 
     const input = document.querySelector(
         "[data-generation]",
     ) as HTMLInputElement;
+
+    const entity = document.querySelector(
+        "[data-entity-type]",
+    ) as HTMLSelectElement;
+
+    const province = document.querySelector(
+        "[data-province]",
+    ) as HTMLSelectElement;
 
     const button = document.querySelector(
         "[data-generate]",
     ) as HTMLButtonElement;
 
     button.addEventListener("click", () => {
-        input.value = generateNIE();
+        const provinceCodes =
+            province.options[province.selectedIndex].value.split(",");
+        const provinceCode =
+            provinceCodes[Math.floor(Math.random() * provinceCodes.length)];
+        input.value = generateCIF(
+            entity.options[entity.selectedIndex].value,
+            provinceCode,
+        );
     });
-    input.value = generateNIE();
+    input.value = generateCIF();
 
     input.addEventListener("click", () => {
         input.select();
@@ -71,7 +120,7 @@ import Layout from "@/layouts/Layout.astro";
 
     validation.addEventListener("keyup", () => {
         const value = validation.value;
-        if (validateNIE(value)) {
+        if (validateCIF(value)) {
             validation.classList.remove("border-red-500");
             validation.classList.add("border-green-500");
         } else {

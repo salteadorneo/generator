@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 
-import { entityTypes, provinces } from "../utils/cif";
+import { entityTypes, provinces } from "@/utils/cif";
 ---
 
 <Layout>
@@ -67,11 +67,11 @@ import { entityTypes, provinces } from "../utils/cif";
             >
                 Validador de CIF
             </h1>
-            <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <div class="flex justify-center gap-4">
                 <input
                     data-validation
                     type="text"
-                    class="w-48 text-center px-4 py-2 text-2xl font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none cursor-copy"
+                    class="w-48 text-center px-4 py-2 text-2xl font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
                 />
             </div>
         </div>
@@ -79,7 +79,7 @@ import { entityTypes, provinces } from "../utils/cif";
 </Layout>
 
 <script>
-    import { generateCIF, validateCIF } from "../utils/cif";
+    import { generateCIF, validateCIF } from "@/utils/cif";
 
     const input = document.querySelector(
         "[data-generation]",

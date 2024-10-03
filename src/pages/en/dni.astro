@@ -8,7 +8,7 @@ import Layout from "@/layouts/Layout.astro";
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
             >
-                Generador de NIE
+                DNI Generator
             </h1>
             <div class="flex justify-center gap-4">
                 <input
@@ -21,7 +21,7 @@ import Layout from "@/layouts/Layout.astro";
                     data-generate
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800"
                 >
-                    Generar
+                    Generate
                 </button>
             </div>
         </div>
@@ -31,7 +31,7 @@ import Layout from "@/layouts/Layout.astro";
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
             >
-                Validador de NIE
+                DNI Validator
             </h1>
             <div class="flex justify-center gap-4">
                 <input
@@ -45,7 +45,7 @@ import Layout from "@/layouts/Layout.astro";
 </Layout>
 
 <script>
-    import { generateNIE, validateNIE } from "@/utils/nif";
+    import { generateDNI, validateDNI } from "@/utils/nif";
 
     const input = document.querySelector(
         "[data-generation]",
@@ -56,9 +56,9 @@ import Layout from "@/layouts/Layout.astro";
     ) as HTMLButtonElement;
 
     button.addEventListener("click", () => {
-        input.value = generateNIE();
+        input.value = generateDNI();
     });
-    input.value = generateNIE();
+    input.value = generateDNI();
 
     input.addEventListener("click", () => {
         input.select();
@@ -71,7 +71,7 @@ import Layout from "@/layouts/Layout.astro";
 
     validation.addEventListener("keyup", () => {
         const value = validation.value;
-        if (validateNIE(value)) {
+        if (validateDNI(value)) {
             validation.classList.remove("border-red-500");
             validation.classList.add("border-green-500");
         } else {

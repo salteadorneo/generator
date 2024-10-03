@@ -1,6 +1,16 @@
 ---
 import { version } from "../../package.json";
 
+import {
+	getLangFromUrl,
+	useTranslations,
+	useTranslatedPath,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -13,7 +23,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="es" class="light">
+<html lang={lang} class="light">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -48,30 +58,29 @@ const {
 				<p
 					class="text-balance mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
 				>
-					Generate random data for your projects. Choose the type of
-					data you want to generate and the amount of data you need.
+					{t("hero.description")}
 				</p>
 				<div class="flex justify-center gap-2 mb-8">
 					<a
-						href="/dni"
+						href={translatePath("/dni")}
 						class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
 					>
 						DNI
 					</a>
 					<a
-						href="/nie"
+						href={translatePath("/nie")}
 						class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
 					>
 						NIE
 					</a>
 					<a
-						href="/cif"
+						href={translatePath("/cif")}
 						class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
 					>
 						CIF
 					</a>
 					<a
-						href="/password"
+						href={translatePath("/password")}
 						class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
 					>
 						Contraseña
@@ -80,5 +89,15 @@ const {
 			</div>
 		</section>
 		<slot />
+		<footer>
+			<div class="px-4 py-8 mx-auto max-w-screen-xl text-center">
+				<p class="text-sm">
+					Developed by
+					<a href="https://github.com/salteadorneo">salteadorneo</a> ·
+					<a href="/">Español</a> ·
+					<a href="/en">English</a>
+				</p>
+			</div>
+		</footer>
 	</body>
 </html>
