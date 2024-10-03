@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 
-import { generateDNI, validateDNI, generateNIE, validateNIE, generateCIF, validateCIF } from '../src/utils/nif';
+import { generateDNI, validateDNI, generateNIE, validateNIE, generateCIF, validateCIF } from '@/utils/nif';
 
 test('Generate DNI', () => {
     const dni = generateDNI();
