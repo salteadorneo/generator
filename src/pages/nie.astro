@@ -1,7 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-import { entityTypes, provinces } from "../utils/cif";
 ---
 
 <Layout>
@@ -10,11 +8,7 @@ import { entityTypes, provinces } from "../utils/cif";
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
             >
-                Generador de CIF
-                <span
-                    class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
-                    >BETA</span
-                >
+                Generador de NIE
             </h1>
             <div class="flex justify-center gap-4">
                 <input
@@ -30,34 +24,6 @@ import { entityTypes, provinces } from "../utils/cif";
                     Generar
                 </button>
             </div>
-            <div class="mt-4 flex flex-col gap-4 items-center">
-                <select
-                    data-entity-type
-                    class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
-                >
-                    <option value="">Selecciona un tipo de entidad</option>
-                    {
-                        entityTypes.map((type) => (
-                            <option
-                                value={type[0]}
-                            >{`${type[0]} - ${type[1]}`}</option>
-                        ))
-                    }
-                </select>
-                <select
-                    data-province
-                    class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
-                >
-                    <option value="">Selecciona una provincia</option>
-                    {
-                        provinces.map((province) => (
-                            <option
-                                value={province[0]}
-                            >{`${province[1]}`}</option>
-                        ))
-                    }
-                </select>
-            </div>
         </div>
     </section>
     <section class="mt-16 bg-white dark:bg-gray-900">
@@ -65,7 +31,7 @@ import { entityTypes, provinces } from "../utils/cif";
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
             >
-                Validador de CIF
+                Validador de NIE
             </h1>
             <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
                 <input
@@ -79,35 +45,20 @@ import { entityTypes, provinces } from "../utils/cif";
 </Layout>
 
 <script>
-    import { generateCIF, validateCIF } from "../utils/cif";
+    import { generateNIE, validateNIE } from "../utils/nif";
 
     const input = document.querySelector(
         "[data-generation]",
     ) as HTMLInputElement;
-
-    const entity = document.querySelector(
-        "[data-entity-type]",
-    ) as HTMLSelectElement;
-
-    const province = document.querySelector(
-        "[data-province]",
-    ) as HTMLSelectElement;
 
     const button = document.querySelector(
         "[data-generate]",
     ) as HTMLButtonElement;
 
     button.addEventListener("click", () => {
-        const provinceCodes =
-            province.options[province.selectedIndex].value.split(",");
-        const provinceCode =
-            provinceCodes[Math.floor(Math.random() * provinceCodes.length)];
-        input.value = generateCIF(
-            entity.options[entity.selectedIndex].value,
-            provinceCode,
-        );
+        input.value = generateNIE();
     });
-    input.value = generateCIF();
+    input.value = generateNIE();
 
     input.addEventListener("click", () => {
         input.select();
@@ -120,7 +71,7 @@ import { entityTypes, provinces } from "../utils/cif";
 
     validation.addEventListener("keyup", () => {
         const value = validation.value;
-        if (validateCIF(value)) {
+        if (validateNIE(value)) {
             validation.classList.remove("border-red-500");
             validation.classList.add("border-green-500");
         } else {

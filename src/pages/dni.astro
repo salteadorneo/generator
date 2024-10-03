@@ -10,12 +10,7 @@ import Layout from "../layouts/Layout.astro";
             >
                 Generador de DNI
             </h1>
-            <p
-                class="text-balance mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400"
-            >
-                Genera un número de DNI válido para pruebas o ejemplos.
-            </p>
-            <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <div class="flex justify-center gap-4">
                 <input
                     data-generation
                     type="text"
@@ -38,11 +33,6 @@ import Layout from "../layouts/Layout.astro";
             >
                 Validador de DNI
             </h1>
-            <p
-                class="text-balance mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400"
-            >
-                Valida un número de DNI para verificar si es válido.
-            </p>
             <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
                 <input
                     data-validation
@@ -55,7 +45,7 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-    import { generateDNI, validateDNI } from "../utils/dni";
+    import { generateDNI, validateDNI } from "../utils/nif";
 
     const input = document.querySelector(
         "[data-generation]",
