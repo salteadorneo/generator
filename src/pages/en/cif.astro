@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-import { entityTypes, provinces } from "@/utils/cif";
+import { entityTypes, provinces } from "@/utils/nif";
 ---
 
 <Layout>
@@ -79,7 +79,7 @@ import { entityTypes, provinces } from "@/utils/cif";
 </Layout>
 
 <script>
-    import { generateCIF, validateCIF } from "@/utils/cif";
+    import { generateCIF, validateCIF } from "@/utils/nif";
 
     const input = document.querySelector(
         "[data-generation]",
