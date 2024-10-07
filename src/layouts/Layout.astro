@@ -41,11 +41,21 @@ const {
 				<div
 					class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl"
 				>
-					<a href="/" class="flex items-center">
-						<span
-							class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
-							>Data Generator</span
+					<a
+						href="/"
+						class="flex items-center gap-1 text-gray-900 dark:text-white"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 -960 960 960"
+							fill="currentColor"
+							><path
+								d="M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-744l56-56 207 207-56 56Z"
+							></path></svg
 						>
+						Data<strong>Generator</strong>
 					</a>
 					<div
 						class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
@@ -91,12 +101,22 @@ const {
 		<footer class="p-4 bg-white sm:p-6 dark:bg-gray-800">
 			<div class="mx-auto max-w-screen-xl">
 				<div class="md:flex md:justify-between">
-					<div class="mb-6 md:mb-0">
-						<a href="/" class="flex items-center">
-							<span
-								class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
-								>Data Generator</span
+					<div>
+						<a
+							href="/"
+							class="flex items-center gap-1 text-gray-900 dark:text-white"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 -960 960 960"
+								fill="currentColor"
+								><path
+									d="M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-744l56-56 207 207-56 56Z"
+								></path></svg
 							>
+							Data<strong>Generator</strong>
 						</a>
 					</div>
 					<div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -104,16 +124,18 @@ const {
 							<h2
 								class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
 							>
-								Generator
+								NIF
 							</h2>
-							<ul class="text-gray-600 dark:text-gray-400">
-								<li class="mb-4">
+							<ul
+								class="space-y-4 text-gray-600 dark:text-gray-400"
+							>
+								<li>
 									<a
 										href={translatePath("/dni")}
 										class="hover:underline">DNI</a
 									>
 								</li>
-								<li class="mb-4">
+								<li>
 									<a
 										href={translatePath("/nie")}
 										class="hover:underline">NIE</a
@@ -131,38 +153,15 @@ const {
 							<h2
 								class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
 							>
-								Follow us
+								Passwords
 							</h2>
-							<ul class="text-gray-600 dark:text-gray-400">
-								<li class="mb-4">
-									<a
-										href="https://github.com/salteadorneo/generator"
-										class="hover:underline">Github</a
-									>
-								</li>
-								<li>
-									<a
-										href="https://x.com/salteadorneodev"
-										class="hover:underline">X</a
-									>
-								</li>
-							</ul>
-						</div>
-						<div>
-							<h2
-								class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+							<ul
+								class="space-y-4 text-gray-600 dark:text-gray-400"
 							>
-								Idiomas
-							</h2>
-							<ul class="text-gray-600 dark:text-gray-400">
-								<li class="mb-4">
-									<a href="/" class="hover:underline"
-										>Español</a
-									>
-								</li>
 								<li>
-									<a href="/en" class="hover:underline"
-										>English</a
+									<a
+										href={translatePath("/cif")}
+										class="hover:underline">Passwords</a
 									>
 								</li>
 							</ul>
