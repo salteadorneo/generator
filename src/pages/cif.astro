@@ -1,4 +1,9 @@
 ---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 import Layout from "@/layouts/Layout.astro";
 
 import { entityTypes, generateCIF, provinces } from "@/utils/nif";
@@ -32,7 +37,7 @@ import ApiRequest from "@components/ApiRequest.astro";
                             data-generate
                             class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800"
                         >
-                            Generar
+                            {t("generate")}
                         </button>
                     </div>
                     <div class="mt-4 flex flex-col gap-4 items-center">
