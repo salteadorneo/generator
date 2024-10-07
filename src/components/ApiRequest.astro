@@ -6,14 +6,14 @@ const { method, endpoint } = Astro.props;
     class="overflow-hidden rounded-lg bg-zinc-900 shadow-md dark:ring-1 dark:ring-white/10"
 >
     <div class="not-prose">
-        <div
-            class="hidden flex min-h-10 flex-wrap items-start gap-x-4 border-b border-zinc-700 bg-zinc-800 px-4 dark:border-zinc-800 dark:bg-transparent"
+        <!-- <div
+            class="flex min-h-10 flex-wrap items-start gap-x-4 border-b border-zinc-700 bg-zinc-800 px-4 dark:border-zinc-800 dark:bg-transparent"
         >
             <h3 class="mr-auto pt-3 text-xs font-semibold text-white">
                 Request and Response
             </h3>
             <div
-                class="hidden -mb-px flex gap-4 text-xs font-medium"
+                class="-mb-px flex gap-4 text-xs font-medium"
                 role="tablist"
                 aria-orientation="horizontal"
             >
@@ -60,7 +60,7 @@ const { method, endpoint } = Astro.props;
                     aria-controls="headlessui-tabs-panel-:rm:">PHP</button
                 >
             </div>
-        </div>
+        </div> -->
         <div>
             <div
                 id="headlessui-tabs-panel-:rg:"
@@ -83,11 +83,36 @@ const { method, endpoint } = Astro.props;
                         <span class="font-mono text-xs text-zinc-400"
                             >{endpoint}</span
                         >
+                        <button
+                            data-copy={endpoint}
+                            class="text-zinc-400 hover:text-white"
+                        >
+                            <svg
+                                width="20"
+                                height="20"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                color="currentColor"
+                                ><path
+                                    d="M19.4 20H9.6C9.26863 20 9 19.7314 9 19.4V9.6C9 9.26863 9.26863 9 9.6 9H19.4C19.7314 9 20 9.26863 20 9.6V19.4C20 19.7314 19.7314 20 19.4 20Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"></path><path
+                                    d="M15 9V4.6C15 4.26863 14.7314 4 14.4 4H4.6C4.26863 4 4 4.26863 4 4.6V14.4C4 14.7314 4.26863 15 4.6 15H9"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"></path></svg
+                            >
+                        </button>
                     </div>
                     <div class="relative">
                         <pre
                             class="overflow-x-auto p-4 text-xs text-white"><code class="language-bash"><slot /></code></pre>
-                        <button
+                        <!-- <button
                             type="button"
                             class="group/button absolute right-4 top-3.5 overflow-hidden rounded-full py-1 pl-2 pr-3 text-2xs font-medium opacity-0 backdrop-blur transition focus:opacity-100 group-hover:opacity-100 bg-white/5 hover:bg-white/7.5 dark:bg-white/2.5 dark:hover:bg-white/5"
                         >
@@ -116,7 +141,7 @@ const { method, endpoint } = Astro.props;
                                 class="pointer-events-none absolute inset-0 flex items-center justify-center text-emerald-400 transition duration-300 translate-y-1.5 opacity-0"
                                 >Copied!</span
                             >
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>
@@ -147,3 +172,10 @@ const { method, endpoint } = Astro.props;
         </div>
     </div>
 </div>
+
+<script define:vars={{ endpoint }}>
+    const button = document.querySelector(`[data-copy='${endpoint}']`);
+    button.addEventListener("click", () => {
+        navigator.clipboard.writeText(`${window.location.origin}${endpoint}`);
+    });
+</script>
