@@ -1,80 +1,99 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-import { entityTypes, provinces } from "@/utils/nif";
+import { entityTypes, generateCIF, provinces } from "@/utils/nif";
+import ApiRequest from "@components/ApiRequest.astro";
 ---
 
 <Layout>
     <section class="bg-white dark:bg-gray-900">
-        <div class="px-4 mx-auto max-w-screen-xl text-center">
-            <h1
-                class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
-            >
-                Generador de CIF
-                <span
-                    class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
-                    >BETA</span
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div class="grid gap-8 lg:grid-cols-2">
+                <article
+                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
                 >
-            </h1>
-            <div class="flex justify-center gap-4">
-                <input
-                    data-generation
-                    type="text"
-                    class="w-48 text-center px-4 py-2 text-2xl font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none cursor-copy"
-                    readonly
-                />
-                <button
-                    data-generate
-                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800"
+                    <h2
+                        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                    >
+                        Generador de CIF
+                        <span
+                            class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+                            >BETA</span
+                        >
+                    </h2>
+                    <div class="flex gap-4">
+                        <input
+                            data-generation
+                            type="text"
+                            class="w-48 text-center px-4 py-2 text-2xl font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none cursor-copy"
+                            readonly
+                        />
+                        <button
+                            data-generate
+                            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800"
+                        >
+                            Generar
+                        </button>
+                    </div>
+                    <div class="mt-4 flex flex-col gap-4 items-center">
+                        <select
+                            data-entity-type
+                            class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
+                        >
+                            <option value=""
+                                >Selecciona un tipo de entidad</option
+                            >
+                            {
+                                entityTypes.map((type) => (
+                                    <option
+                                        value={type[0]}
+                                    >{`${type[0]} - ${type[1]}`}</option>
+                                ))
+                            }
+                        </select>
+                        <select
+                            data-province
+                            class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
+                        >
+                            <option value="">Selecciona una provincia</option>
+                            {
+                                provinces.map((province) => (
+                                    <option
+                                        value={province[0]}
+                                    >{`${province[1]}`}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                </article>
+                <article
+                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
                 >
-                    Generar
-                </button>
-            </div>
-            <div class="mt-4 flex flex-col gap-4 items-center">
-                <select
-                    data-entity-type
-                    class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
-                >
-                    <option value="">Selecciona un tipo de entidad</option>
-                    {
-                        entityTypes.map((type) => (
-                            <option
-                                value={type[0]}
-                            >{`${type[0]} - ${type[1]}`}</option>
-                        ))
-                    }
-                </select>
-                <select
-                    data-province
-                    class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
-                >
-                    <option value="">Selecciona una provincia</option>
-                    {
-                        provinces.map((province) => (
-                            <option
-                                value={province[0]}
-                            >{`${province[1]}`}</option>
-                        ))
-                    }
-                </select>
+                    <h2
+                        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                    >
+                        Validador de CIF
+                    </h2>
+                    <div class="flex gap-4">
+                        <input
+                            data-validation
+                            type="text"
+                            class="w-48 text-center px-4 py-2 text-2xl font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
+                        />
+                    </div>
+                </article>
             </div>
         </div>
     </section>
-    <section class="mt-16 bg-white dark:bg-gray-900">
-        <div class="px-4 mx-auto max-w-screen-xl text-center">
-            <h1
-                class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white"
-            >
-                Validador de CIF
-            </h1>
-            <div class="flex justify-center gap-4">
-                <input
-                    data-validation
-                    type="text"
-                    class="w-48 text-center px-4 py-2 text-2xl font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
-                />
-            </div>
-        </div>
+    <section
+        class="hidden mt-16 px-4 mx-auto max-w-screen-sm flex flex-col gap-4"
+    >
+        <ApiRequest method="GET" endpoint="/api/v1/cif">
+            {JSON.stringify(Array.from({ length: 1 }, () => generateCIF()))}
+        </ApiRequest>
+        <ApiRequest method="GET" endpoint="/api/v1/cif?quantity=5">
+            {JSON.stringify(Array.from({ length: 5 }, () => generateCIF()))}
+        </ApiRequest>
     </section>
 </Layout>
 
