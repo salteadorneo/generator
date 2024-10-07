@@ -109,7 +109,6 @@ export function generateNIE(): string {
     const prefix = NIE_LETTERS[Math.floor(Math.random() * 3)];
     const number = generateRandomNumber(7);
 
-    // Ajustar el número en función del prefijo antes de calcular la letra
     const adjustedNumber = prefix === 'X' ? parseInt(number, 10) :
         prefix === 'Y' ? parseInt(number, 10) + 10000000 :
             parseInt(number, 10) + 20000000;
@@ -124,7 +123,6 @@ export function validateNIE(value: string): boolean {
         const number = parseInt(value.slice(1, -1), 10);
         const letter = value.charAt(value.length - 1);
 
-        // Ajustar el número en función del prefijo antes de calcular la letra
         const adjustedNumber = prefix === 'X' ? number :
             prefix === 'Y' ? number + 10000000 :
                 number + 20000000;
