@@ -1,6 +1,4 @@
 ---
-import { version } from "../../package.json";
-
 import {
 	getLangFromUrl,
 	useTranslations,
@@ -36,67 +34,189 @@ const {
 		></script>
 	</head>
 	<body>
-		<section class="bg-white dark:bg-gray-900">
-			<div class="pt-16 px-4 mx-auto max-w-screen-xl text-center">
-				<p
-					class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white"
-					role="alert"
+		<header>
+			<nav
+				class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800"
+			>
+				<div
+					class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl"
 				>
-					<span
-						class="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3"
-						>New</span
-					>
-					<span class="text-sm font-medium">
-						Launched version {version}
-					</span>
-				</p>
-				<h1
-					class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white"
-				>
-					Data Generator
-				</h1>
-				<p
-					class="text-balance mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
-				>
-					{t("hero.description")}
-				</p>
-				<div class="flex justify-center gap-2 mb-8">
-					<a
-						href={translatePath("/dni")}
-						class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-					>
-						DNI
+					<a href="/" class="flex items-center">
+						<span
+							class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
+							>Data Generator</span
+						>
 					</a>
-					<a
-						href={translatePath("/nie")}
-						class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+					<div
+						class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+						id="mobile-menu-2"
 					>
-						NIE
-					</a>
-					<a
-						href={translatePath("/cif")}
-						class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-					>
-						CIF
-					</a>
-					<a
-						href={translatePath("/password")}
-						class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-					>
-						Contraseña
-					</a>
+						<ul
+							class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
+						>
+							<li>
+								<a
+									href={translatePath("/dni")}
+									class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+									>DNI</a
+								>
+							</li>
+							<li>
+								<a
+									href={translatePath("/nie")}
+									class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+									>NIE</a
+								>
+							</li>
+							<li>
+								<a
+									href={translatePath("/cif")}
+									class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+									>CIF</a
+								>
+							</li>
+							<li>
+								<a
+									href={translatePath("/password")}
+									class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+									>Passwords</a
+								>
+							</li>
+						</ul>
+					</div>
 				</div>
-			</div>
-		</section>
+			</nav>
+		</header>
 		<slot />
-		<footer>
-			<div class="px-4 py-8 mx-auto max-w-screen-xl text-center">
-				<p class="text-sm">
-					Developed by
-					<a href="https://github.com/salteadorneo">salteadorneo</a> ·
-					<a href="/">Español</a> ·
-					<a href="/en">English</a>
-				</p>
+		<footer class="p-4 bg-white sm:p-6 dark:bg-gray-800">
+			<div class="mx-auto max-w-screen-xl">
+				<div class="md:flex md:justify-between">
+					<div class="mb-6 md:mb-0">
+						<a href="/" class="flex items-center">
+							<span
+								class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+								>Data Generator</span
+							>
+						</a>
+					</div>
+					<div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+						<div>
+							<h2
+								class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+							>
+								Generator
+							</h2>
+							<ul class="text-gray-600 dark:text-gray-400">
+								<li class="mb-4">
+									<a
+										href={translatePath("/dni")}
+										class="hover:underline">DNI</a
+									>
+								</li>
+								<li class="mb-4">
+									<a
+										href={translatePath("/nie")}
+										class="hover:underline">NIE</a
+									>
+								</li>
+								<li>
+									<a
+										href={translatePath("/cif")}
+										class="hover:underline">CIF</a
+									>
+								</li>
+							</ul>
+						</div>
+						<div>
+							<h2
+								class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+							>
+								Follow us
+							</h2>
+							<ul class="text-gray-600 dark:text-gray-400">
+								<li class="mb-4">
+									<a
+										href="https://github.com/salteadorneo/generator"
+										class="hover:underline">Github</a
+									>
+								</li>
+								<li>
+									<a
+										href="https://x.com/salteadorneodev"
+										class="hover:underline">X</a
+									>
+								</li>
+							</ul>
+						</div>
+						<div>
+							<h2
+								class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+							>
+								Idiomas
+							</h2>
+							<ul class="text-gray-600 dark:text-gray-400">
+								<li class="mb-4">
+									<a href="/" class="hover:underline"
+										>Español</a
+									>
+								</li>
+								<li>
+									<a href="/en" class="hover:underline"
+										>English</a
+									>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<hr
+					class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"
+				/>
+				<div class="sm:flex sm:items-center sm:justify-between">
+					<span
+						class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
+					>
+						<a href="/" class="hover:underline">Español</a> · <a
+							href="/en"
+							class="hover:underline">English</a
+						>
+					</span>
+					<div class="flex mt-4 space-x-4 sm:justify-center sm:mt-0">
+						<a
+							href="https://github.com/salteadorneo/generator"
+							target="_blank"
+							class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+						>
+							<svg
+								class="size-6"
+								fill="currentColor"
+								viewBox="0 0 24 24"
+								aria-hidden="true"
+								><path
+									fill-rule="evenodd"
+									d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+									clip-rule="evenodd"></path></svg
+							>
+						</a>
+						<a
+							href="https://x.com/salteadorneodev"
+							target="_blank"
+							class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+						>
+							<svg
+								class="size-6"
+								viewBox="0 0 24 24"
+								aria-hidden="true"
+								fill="currentColor"
+								><g
+									><path
+										d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+									></path></g
+								></svg
+							>
+						</a>
+					</div>
+				</div>
 			</div>
 		</footer>
 	</body>
