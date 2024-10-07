@@ -1,0 +1,124 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+import Layout from "@/layouts/Layout.astro";
+import { plateTemplates } from "@utils/plate";
+---
+
+<Layout>
+    <section class="bg-white dark:bg-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div class="grid gap-8 lg:grid-cols-2">
+                <article
+                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+                >
+                    <h2
+                        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                    >
+                        Generador de matrículas
+                        <span
+                            class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+                            >BETA</span
+                        >
+                    </h2>
+                    <div class="flex gap-4">
+                        <input
+                            data-generation
+                            type="text"
+                            class="w-48 text-center px-4 py-2 text-2xl font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none cursor-copy"
+                            readonly
+                        />
+                        <button
+                            data-generate
+                            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800"
+                        >
+                            {t("generate")}
+                        </button>
+                    </div>
+
+                    <div class="mt-4 flex flex-col gap-4 items-center">
+                        <select
+                            data-template
+                            class="max-w-sm px-4 py-2 font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
+                        >
+                            {
+                                Object.entries(plateTemplates).map(
+                                    ([key, { name }]) => (
+                                        <option value={key}>{`${name}`}</option>
+                                    ),
+                                )
+                            }
+                        </select>
+                    </div>
+                </article>
+                <article
+                    class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+                >
+                    <h2
+                        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                    >
+                        Validador de matrículas
+                    </h2>
+                    <div class="flex gap-4">
+                        <input
+                            data-validation
+                            type="text"
+                            class="w-48 text-center px-4 py-2 text-2xl font-medium text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm outline-none"
+                        />
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<script>
+    import {
+        generatePlate,
+        validatePlate,
+        type PlateType,
+    } from "@/utils/plate";
+
+    const input = document.querySelector(
+        "[data-generation]",
+    ) as HTMLInputElement;
+
+    const template = document.querySelector(
+        "[data-template]",
+    ) as HTMLSelectElement;
+
+    const button = document.querySelector(
+        "[data-generate]",
+    ) as HTMLButtonElement;
+
+    button.addEventListener("click", () => {
+        input.value = generatePlate(template.value as PlateType);
+    });
+    template.addEventListener("change", () => {
+        input.value = generatePlate(template.value as PlateType);
+    });
+    input.value = generatePlate(template.value as PlateType);
+
+    input.addEventListener("click", () => {
+        input.select();
+        document.execCommand("copy");
+    });
+
+    const validation = document.querySelector(
+        "[data-validation]",
+    ) as HTMLInputElement;
+
+    validation.addEventListener("keyup", () => {
+        const value = validation.value;
+        if (validatePlate(value)) {
+            validation.classList.remove("border-red-500");
+            validation.classList.add("border-green-500");
+        } else {
+            validation.classList.remove("border-green-500");
+            validation.classList.add("border-red-500");
+        }
+    });
+</script>
