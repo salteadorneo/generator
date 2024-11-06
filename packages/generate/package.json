@@ -1,6 +1,6 @@
 {
   "name": "@data-js/generate",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A simple data generator that generates random data for testing purposes",
   "author": "salteadorneo",
   "license": "MIT",
@@ -30,8 +30,10 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "test": "vitest",
-    "publish": "npm run build && npm publish --access public"
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@data-js/core": "^0.0.1"
   },
   "devDependencies": {
     "typescript": "^5.6.3",
