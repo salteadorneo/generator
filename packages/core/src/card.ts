@@ -13,7 +13,9 @@ export const cardTypes = [
     { name: 'Visa Electron', prefix: ['4026', '417500', '4508', '4844', '4913', '4917'], length: 16, cvvLength: 3 },
 ];
 
-function luhnAlgorithm(cardNumber: string): boolean {
+export type CardType = typeof cardTypes[number]['name']
+
+export function luhnAlgorithm(cardNumber: string): boolean {
     let sum = 0;
     let shouldDouble = false;
 
@@ -34,32 +36,6 @@ function luhnAlgorithm(cardNumber: string): boolean {
     return sum % 10 === 0;
 }
 
-function generateRandomDigits(length: number): string {
+export function generateRandomDigits(length: number): string {
     return Array.from({ length }, () => Math.floor(Math.random() * 10)).join('');
-}
-
-export function generateCardDetails(cardType?: string) {
-    const type = cardType
-        ? cardTypes.find(c => c.name === cardType)
-        : cardTypes[Math.floor(Math.random() * cardTypes.length)];
-
-    if (!type) {
-        throw new Error('Unsupported card type.');
-    }
-
-    const prefix = type.prefix[Math.floor(Math.random() * type.prefix.length)];
-    const lengthWithoutChecksum = type.length - 1;
-    const accountNumber = generateRandomDigits(lengthWithoutChecksum - prefix.length);
-    let cardNumber = `${prefix}${accountNumber}`;
-
-    for (let i = 0; i <= 9; i++) {
-        if (luhnAlgorithm(cardNumber + i.toString())) {
-            cardNumber += i.toString();
-            break;
-        }
-    }
-
-    const securityCode = generateRandomDigits(type.cvvLength);
-
-    return { cardNumber, securityCode, type: type.name };
 }

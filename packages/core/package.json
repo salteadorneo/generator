@@ -30,7 +30,8 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "test": "vitest"
+    "test": "vitest",
+    "publish": "npm run build && npm publish --access public"
   },
   "devDependencies": {
     "typescript": "^5.6.3",
